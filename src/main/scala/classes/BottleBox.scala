@@ -7,7 +7,7 @@ import annotation.{Bottle, Contents}
   */
 
 @Bottle(10000)
-class BottleBox {
+class BottleBox extends ParentBottle {
 
   @Contents("Nestle", "water")
   def waterBottle = Unit
