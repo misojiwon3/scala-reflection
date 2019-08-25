@@ -11,7 +11,8 @@ import reflect.runtime.universe._
   */
 object CommonMethods {
 
-  def classAnnotation = {
+
+  def classAnnotation: Unit = {
     val annotation = typeOf[BottleBox].typeSymbol.annotations.head
     val anno: u.ClassSymbol = u.typeOf[BottleBox].typeSymbol.asClass
 
@@ -25,13 +26,13 @@ object CommonMethods {
     }
   }
 
-  def extractMembers = {
+  def extractMembers: Unit = {
     // 해당 클래스의 'Type' 을 이용하여 constructor, method, field 추출
     val extractMembers = u.typeOf[BottleBox].members.collect { case s: TermSymbol => s}
     extractMembers.foreach(println)
   }
 
-  def getAnnotationArgs(annotationName: String) = { // TODO : Annotation class를 find 하는 방법 찾아야 함
+  def getAnnotationArgs(annotationName: String): Unit = { // TODO : Annotation class를 find 하는 방법 찾아야 함
     val extractMembers = u.typeOf[BottleBox].decls.collect { case s: TermSymbol => s}
     val annotations = extractMembers.flatMap(_.annotations)
 
@@ -43,7 +44,7 @@ object CommonMethods {
     }
   }
 
-  def listProperties[T: TypeTag] = {
+  def listProperties[T: TypeTag]: Iterable[(u.TermSymbol, u.Annotation)] = {
     val fields = typeOf[T].decls.collect { case s: TermSymbol => s}
       .filter(s => s.isVal || s.isVar || s.isMethod)
 
@@ -55,7 +56,7 @@ object CommonMethods {
     }
   }
 
-  def printListProperties = {
+  def printListProperties(): Unit = {
     println("listProperties[BottleBox].size : " + listProperties[BottleBox].size)
     listProperties[BottleBox].foreach { l =>
       println("TermSymbol : " + l._1 + ", annotation : " + l._2)
@@ -64,11 +65,11 @@ object CommonMethods {
     println("list : " + listProperties[BottleBox])
   }
 
-  def checkSymbol = {
+  def checkSymbol(): Unit = {
 
   }
 
-  def checkType = {
+  def checkType(): Unit = {
     val bottleBoxType: u.Type = typeOf[BottleBox] // initiating with typeOf method
     val childBottleType: u.Type = typeOf[ChildBottle]
 
@@ -95,7 +96,7 @@ object CommonMethods {
 
   }
 
-  def checkTree = {
+  def checkTree(): Unit = {
 
   }
 }

@@ -1,6 +1,11 @@
 package main
 
-import common.CommonMethods._
+import classes.Television
+import common.ScalaReflection._
+import common.Traverser
+
+import scala.collection.immutable
+import scala.reflect.runtime.universe
 
 /**
   * Created by hanseung on 2017-04-26.
@@ -16,11 +21,20 @@ object Main extends App {
 //
 //    println("== List Properties =========================================================================")
 //    printListProperties
+//
+//    println("== Annotation Args =========================================================================")
+//    getAnnotationArgs("Contents")
+//
+//    println("== Check Symbol ============================================================================")
+//    checkSymbol()
 
-    println("== Annotation Args =========================================================================")
-    getAnnotationArgs("Contents")
+    println("== Reflection Tree ============================================================================")
+    val trees: immutable.Seq[universe.Tree] = getTreeFromClass(classOf[Television])
 
-    println("== Check Symbol ============================================================================")
-    checkSymbol
+    trees.foreach { tree =>
+      Traverser.traverse(tree)
+      Traverser.applies.foreach(a => println(">> "+a))
+    }
+
   }
 }
